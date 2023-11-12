@@ -68,3 +68,5 @@ export const dietList: RadioButtonOptionList = {
         },
     ],
 };
+
+export const targetAllergens = ['Crustaceans', 'Fish', 'Eggs'];

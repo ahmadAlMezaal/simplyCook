@@ -5,6 +5,8 @@ import { ProgressIndicator } from '#components/progressIndicator.component';
 import { allergiesRadioButtonList, bullets, consumerCountRadioButtonList, dietList } from '../constants/constants';
 import { RadioButtonList } from '#components/radioButtonList.component';
 import { useSafeState } from '../hooks/useSafeState.hook';
+import { RecipesCarousel } from './components/recipesCarousel.component';
+import { SimplyCookButton } from '#components/simplyCookButton.component';
 
 export const HomeScreen: React.FC = () => {
 
@@ -32,6 +34,10 @@ export const HomeScreen: React.FC = () => {
         },
         [dietRestriction]
     );
+
+    const handleCompleteProfile = () => {
+
+    };
 
     return <ScrollView contentContainerStyle={styles.scrollViewStyle}>
         <View style={styles.container}>
@@ -70,7 +76,8 @@ export const HomeScreen: React.FC = () => {
                     <Text style={[styles.text, { marginVertical: 11 }]}>Finally, pick 3 or more recipes that you like below:</Text>
                     <Text style={[styles.text, { fontSize: 13 }]}>This will help us personalise your SimplyCook experience. Tap 3 you like!</Text>
                 </View>
-
+                <RecipesCarousel />
+                <SimplyCookButton containerStyle={styles.buttonStyle} onPress={handleCompleteProfile} title='Finish' />
             </Card>
         </View>
     </ScrollView>;
@@ -97,6 +104,7 @@ const styles = StyleSheet.create(
             marginHorizontal: 21,
             paddingTop: 34,
             marginBottom: 48,
+            paddingBottom: 46,
         },
         title: {
             fontSize: 20,
@@ -135,5 +143,8 @@ const styles = StyleSheet.create(
             fontSize: 18,
             fontWeight: '700'
         },
+        buttonStyle: {
+            marginHorizontal: 17,
+        }
     }
 );
