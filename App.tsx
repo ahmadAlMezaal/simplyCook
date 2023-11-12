@@ -1,12 +1,13 @@
+import { HomeScreen } from '#screens/home.screen';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
-function App(): JSX.Element {
+const App: React.FC = () => {
 
     return <View style={styles.container}>
-        <Text>Hello world!</Text>
+        <HomeScreen />
     </View>;
-}
+};
 
 const styles = StyleSheet.create(
     {
