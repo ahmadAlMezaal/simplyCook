@@ -29,8 +29,10 @@ const BulletComponent: React.FC<BulletProps> = ({ bullet, index }) => {
                     <Image source={require('#assets/tick.png')} /> :
                     <Text style={[styles.index, !isActive && { color: '#838383' }]}>{index + 1}</Text>
             }
+            <View style={styles.titleContainer}>
+                <Text style={[styles.title, !isActive && { color: '#838383' }]}>{bullet.title}</Text>
+            </View>
         </View>
-        {/* <Text>Delivery</Text> */}
     </View>;
 };
 
@@ -85,6 +87,15 @@ const styles = StyleSheet.create(
         index: {
             fontWeight: 'bold',
             color: 'white'
+        },
+        titleContainer: {
+            position: 'absolute',
+            width: 80,
+            bottom: -35,
+        },
+        title: {
+            textAlign: 'center',
+            color: 'black'
         }
     }
 );

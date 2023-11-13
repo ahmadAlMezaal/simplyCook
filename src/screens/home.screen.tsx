@@ -36,7 +36,7 @@ export const HomeScreen: React.FC = () => {
     );
 
     const handleCompleteProfile = () => {
-
+        //TODO: Call API to complete profile.
     };
 
     return <ScrollView contentContainerStyle={styles.scrollViewStyle}>
@@ -108,7 +108,8 @@ const styles = StyleSheet.create(
             marginHorizontal: 34,
         },
         foodBoxImage: {
-            marginVertical: 19,
+            marginTop: '15%',
+            marginBottom: 19,
         },
         innerContainer: {
             paddingHorizontal: 21,
