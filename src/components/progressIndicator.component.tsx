@@ -27,7 +27,7 @@ const BulletComponent: React.FC<BulletProps> = ({ bullet, index }) => {
             {
                 bullet.isCompleted && bullet.isStarted ?
                     <Image source={require('#assets/tick.png')} /> :
-                    <Text style={styles.index}>{index + 1}</Text>
+                    <Text style={[styles.index, !isActive && { color: '#838383' }]}>{index + 1}</Text>
             }
         </View>
         {/* <Text>Delivery</Text> */}
@@ -83,8 +83,8 @@ const styles = StyleSheet.create(
             backgroundColor: '#D4D4D4',
         },
         index: {
-            color: 'white',
             fontWeight: 'bold',
+            color: 'white'
         }
     }
 );

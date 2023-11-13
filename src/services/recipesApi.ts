@@ -5,6 +5,12 @@ export const fetchRecipes = () => {
     return api.get(route);
 };
 
+export const fetchRecipeById = (id: number) => {
+    const route = `recipes/${id}`;
+    return api.get(route);
+};
+
 export const recipesApi = {
-    fetchRecipes
+    fetchRecipes,
+    fetchRecipeById
 };

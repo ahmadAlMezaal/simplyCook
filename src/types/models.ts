@@ -1,4 +1,4 @@
-import { RadioButtonListType } from './enum';
+import { AppActionsTypes, RadioButtonListType } from './enum';
 
 export type Bullet = {
     title: string;
@@ -86,3 +86,13 @@ export type Recipe = {
     recipeId: null;
     enabled: number
 }
+
+export type AppContextType = {
+    favoriteRecipesIds: { [key: string]: number };
+    addRecipeToFavorites: (recipeId: number) => void;
+    removeRecipeToFavorites: (recipeId: number) => void;
+}
+
+export type AppAction =
+    { type: AppActionsTypes.ADD_RECIPE_TO_FAVORITES; payload: number } |
+    { type: AppActionsTypes.REMOVE_RECIPE_TO_FAVORITES; payload: number }

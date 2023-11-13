@@ -1,8 +1,8 @@
-import { Dimensions, Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Dimensions, Image, StyleSheet, Text, View } from 'react-native';
 import { Recipe } from '#types/models';
-import { SvgHeart } from '#root/src/icons/hear.icon';
+import { FavoriteButton } from './favoriteButton.component';
 import { useSafeState } from '#root/src/hooks/useSafeState.hook';
-import { useCallback } from 'react';
+import { colors } from '#root/src/constants/colors';
 
 type Props = {
     recipe: Recipe;
@@ -12,21 +12,25 @@ const { width: screenWidth } = Dimensions.get('screen');
 
 export const FrontRecipeCard: React.FC<Props> = ({ recipe }) => {
 
-    const [isFavorite, setIsFavorite] = useSafeState<boolean>(false);
+    const [isImageLoading, setIsImageLoading] = useSafeState(true);
 
-    const handleAddRecipeToFavorites = useCallback(
-        () => {
-            setIsFavorite(true);
-        },
-        []
-    );
+    const handleLoading = () => {
+        setIsImageLoading(false);
+    };
 
     return <View style={styles.container}>
         <View style={styles.imageContainer}>
-            <Image source={{ uri: recipe.image }} style={styles.recipeImage} />
-            <Pressable style={styles.heartContainer} onPress={handleAddRecipeToFavorites}>
-                <SvgHeart isSelected={isFavorite} />
-            </Pressable>
+            {
+                isImageLoading && <ActivityIndicator size="large" color={colors.primary} style={styles.activityIndicator} />
+            }
+            <Image
+                source={{ uri: recipe.image }}
+                style={styles.recipeImage}
+                onLoad={handleLoading}
+                onError={handleLoading}
+            />
+
+            <FavoriteButton recipeId={recipe.id} />
         </View>
         <Text style={styles.name}>{recipe.name}</Text>
         <Text style={styles.shortDesc}>{recipe.shortDescription}</Text>
@@ -48,17 +52,6 @@ const styles = StyleSheet.create(
             height: 182,
             paddingBottom: 16,
         },
-        heartContainer: {
-            width: 45,
-            height: 45,
-            justifyContent: 'center',
-            alignItems: 'center',
-            position: 'absolute',
-            backgroundColor: 'white',
-            borderRadius: 25,
-            bottom: 10,
-            right: 10,
-        },
         name: {
             marginTop: 16,
             marginBottom: 5,
@@ -69,6 +62,15 @@ const styles = StyleSheet.create(
             color: '#414042',
             fontSize: 13,
             flexShrink: 1,
+        },
+        activityIndicator: {
+            position: 'absolute',
+            left: 0,
+            right: 0,
+            top: 0,
+            bottom: 0,
+            alignItems: 'center',
+            justifyContent: 'center',
         },
     }
 );

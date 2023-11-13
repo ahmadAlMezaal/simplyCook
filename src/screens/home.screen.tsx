@@ -7,7 +7,6 @@ import { RadioButtonList } from '#components/radioButtonList.component';
 import { useSafeState } from '../hooks/useSafeState.hook';
 import { RecipesCarousel } from './components/recipesCarousel.component';
 import { SimplyCookButton } from '#components/simplyCookButton.component';
-import { FlipCard } from '#components/flipCard.component';
 
 export const HomeScreen: React.FC = () => {
 
@@ -42,7 +41,6 @@ export const HomeScreen: React.FC = () => {
 
     return <ScrollView contentContainerStyle={styles.scrollViewStyle}>
         <View style={styles.container}>
-            <Image style={styles.logo} source={require('#assets/sc-logo.png')} />
             <Card style={styles.card}>
                 <View style={styles.header}>
                     <Text style={styles.title}>Complete your profile</Text>
@@ -88,13 +86,6 @@ const styles = StyleSheet.create(
     {
         container: {
             flex: 1,
-            marginTop: 66,
-        },
-        logo: {
-            width: 200,
-            height: 50,
-            alignSelf: 'center',
-            resizeMode: 'contain'
         },
         scrollViewStyle: {
             flexGrow: 1,

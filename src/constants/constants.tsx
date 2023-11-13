@@ -28,7 +28,7 @@ export const bullets: Bullet[] = [
 
 export const allergiesRadioButtonList: RadioButtonOptionList = {
     title: 'Do you have any allergies?',
-    type: RadioButtonListType.horizontal,
+    type: RadioButtonListType.HORIZONTAL,
     items: [
         { title: 'Yes' },
         { title: 'No' }
@@ -37,7 +37,7 @@ export const allergiesRadioButtonList: RadioButtonOptionList = {
 
 export const consumerCountRadioButtonList: RadioButtonOptionList = {
     title: 'I usually cook for...',
-    type: RadioButtonListType.vertical,
+    type: RadioButtonListType.VERTICAL,
     items: [
         {
             title: '2 people',
@@ -52,7 +52,7 @@ export const consumerCountRadioButtonList: RadioButtonOptionList = {
 
 export const dietList: RadioButtonOptionList = {
     title: 'I am...',
-    type: RadioButtonListType.vertical,
+    type: RadioButtonListType.VERTICAL,
     items: [
         {
             title: 'Vegetarian',

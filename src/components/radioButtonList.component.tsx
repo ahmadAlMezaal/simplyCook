@@ -12,7 +12,7 @@ type RadioButtonListProps = {
 
 export const RadioButtonList: React.FC<RadioButtonListProps> = (props) => {
 
-    const isHorizontal = props.radioButtonList.type === RadioButtonListType.horizontal;
+    const isHorizontal = props.radioButtonList.type === RadioButtonListType.HORIZONTAL;
     return <View style={props.containerStyle}>
         <Text style={styles.title}>{props.radioButtonList.title}</Text>
         <View style={isHorizontal ? styles.row : styles.col}>
