@@ -1,6 +1,5 @@
 import { ActivityIndicator, Dimensions, Image, StyleSheet, Text, View } from 'react-native';
 import { Recipe } from '#types/models';
-import { FavoriteButton } from './favoriteButton.component';
 import { useSafeState } from '#root/src/hooks/useSafeState.hook';
 import { colors } from '#root/src/constants/colors';
 
@@ -29,7 +28,6 @@ export const BackRecipeCard: React.FC<Props> = ({ recipe }) => {
                 onLoad={handleLoading}
                 onError={handleLoading}
             />
-            <FavoriteButton recipeId={recipe.id} />
         </View>
         <Text style={styles.name}>Cooking time: {recipe.cookingTime}</Text>
         <Text style={styles.name}>Average rating: {recipe.averageRating}</Text>

@@ -85,6 +85,7 @@ const styles = StyleSheet.create(
         },
         cardBack: {
             position: 'absolute',
+            zIndex: -10,
             top: 0,
         },
     }

@@ -1,13 +1,16 @@
 import { HomeScreen } from '#screens/home.screen';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Image, Pressable } from 'react-native';
+import { Image, Pressable, StyleSheet, Text } from 'react-native';
 import { SvgHeart } from '../icons/hear.icon';
 import { FavoriteRecipesScreen } from '#screens/favoriteRecipes.screen';
 import { SvgBack } from '../icons/back.icon';
+import { useAppContext } from '../context/providers/app.provider';
 
 const Stack = createStackNavigator();
 
 export const HomeStack: React.FC = () => {
+
+    const { favoriteRecipesIds } = useAppContext();
 
     return <Stack.Navigator>
         <Stack.Screen
@@ -29,8 +32,9 @@ export const HomeStack: React.FC = () => {
                             shadowOpacity: 0,
                             elevation: 0,
                         },
-                        headerRight: () => <Pressable style={{ marginRight: 16 }} onPress={() => navigation.push('FavoriteRecipes')}>
+                        headerRight: () => <Pressable style={[styles.heartRow, { marginRight: 16 }]} onPress={() => navigation.push('FavoriteRecipes')}>
                             <SvgHeart isSelected />
+                            <Text style={styles.count}>{Object.keys(favoriteRecipesIds).length}</Text>
                         </Pressable>
                     }
                 )
@@ -61,3 +65,18 @@ export const HomeStack: React.FC = () => {
         />
     </Stack.Navigator>;
 };
+
+const styles = StyleSheet.create(
+    {
+        heartRow: {
+            flexDirection: 'row',
+        },
+        count: {
+            fontWeight: 'bold',
+            fontSize: 15,
+            position: 'absolute',
+            bottom: -10,
+            right: -4,
+        }
+    }
+);

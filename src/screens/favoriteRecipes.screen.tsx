@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native';
+import { Dimensions, Image, StyleSheet, Text, View } from 'react-native';
 import { useAppContext } from '../context/providers/app.provider';
 import { useEffect } from 'react';
 import { useSafeState } from '../hooks/useSafeState.hook';
@@ -10,6 +10,7 @@ import { FrontRecipeCard } from './components/frontRecipeCard.component';
 import { FlippableCard } from '#components/flippable.component';
 import { Loader } from '#components/loader.component';
 
+const { width: screenWidth } = Dimensions.get('screen');
 export const FavoriteRecipesScreen: React.FC = () => {
 
     const { favoriteRecipesIds } = useAppContext();
@@ -45,6 +46,12 @@ export const FavoriteRecipesScreen: React.FC = () => {
         front={<FrontRecipeCard recipe={item} />}
     />;
     const renderSeparator = () => <View style={{ marginBottom: '15%' }} />;
+    const renderEmptyComponent = () => {
+        return <View style={styles.emptyViewContainer}>
+            <Image style={styles.image} source={require('#assets/empty-favorites.png')} />
+            <Text style={styles.title}>You don't have any favorites yet!</Text>
+        </View>;
+    };
 
     if (isLoading) {
         return <Loader />;
@@ -57,6 +64,7 @@ export const FavoriteRecipesScreen: React.FC = () => {
             keyExtractor={keyExtractor}
             renderItem={renderItem}
             ItemSeparatorComponent={renderSeparator}
+            ListEmptyComponent={renderEmptyComponent}
         />
     </View>;
 };
@@ -71,6 +79,21 @@ const styles = StyleSheet.create(
             flexGrow: 1,
             padding: 16,
             alignSelf: 'center',
+        },
+        emptyViewContainer: {
+            marginTop: '25%',
+            alignItems: 'center',
+            justifyContent: 'center',
+        },
+        image: {
+            height: 250,
+            width: screenWidth * 0.7,
+            resizeMode: 'contain'
+        },
+        title: {
+            fontWeight: 'bold',
+            fontSize: 18,
+            marginTop: 5,
         }
     }
 );

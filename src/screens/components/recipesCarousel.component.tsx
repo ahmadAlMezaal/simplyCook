@@ -2,11 +2,12 @@ import { useSafeState } from '#root/src/hooks/useSafeState.hook';
 import { recipesApi } from '#services/recipesApi';
 import { Recipe } from '#types/models';
 import { useEffect } from 'react';
-import { FlatList, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, FlatList, StyleSheet, View } from 'react-native';
 import { FrontRecipeCard } from './frontRecipeCard.component';
 import { targetAllergens } from '#root/src/constants/constants';
 import { FlippableCard } from '#components/flippable.component';
 import { BackRecipeCard } from './backRecipeCard.component';
+import { colors } from '#root/src/constants/colors';
 
 const filterRecipes = (recipes: Recipe[]) => recipes.filter(recipe =>
     recipe.allergens.some(allergen => targetAllergens.includes(allergen))
@@ -15,13 +16,20 @@ const filterRecipes = (recipes: Recipe[]) => recipes.filter(recipe =>
 export const RecipesCarousel: React.FC = () => {
 
     const [recipes, setRecipes] = useSafeState<Recipe[]>([]);
+    const [isLoading, setIsLoading] = useSafeState<boolean>(true);
 
     useEffect(
         () => {
             const init = async () => {
-                const response = await recipesApi.fetchRecipes();
-                const filteredResult = filterRecipes(response.data);
-                setRecipes(filteredResult);
+                try {
+                    const response = await recipesApi.fetchRecipes();
+                    const filteredResult = filterRecipes(response.data);
+                    setRecipes(filteredResult);
+                } catch {
+                    console.log('Error fetching recipes');
+                } finally {
+                    setIsLoading(false);
+                }
             };
             init();
         },
@@ -34,6 +42,10 @@ export const RecipesCarousel: React.FC = () => {
         front={<FrontRecipeCard recipe={item} />}
     />;
     const renderSeparator = () => <View style={{ marginRight: 22 }} />;
+
+    if (isLoading) {
+        return <ActivityIndicator size={'large'} style={styles.loader} color={colors.primary} />;
+    }
 
     return <FlatList
         contentContainerStyle={styles.flatListStyle}
@@ -51,6 +63,9 @@ const styles = StyleSheet.create(
             paddingHorizontal: 21,
             paddingTop: 25,
             paddingBottom: 43,
+        },
+        loader: {
+            height: 200,
         }
     }
 );
