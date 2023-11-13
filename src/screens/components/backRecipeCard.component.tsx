@@ -10,7 +10,7 @@ type Props = {
 
 const { width: screenWidth } = Dimensions.get('screen');
 
-export const RecipeCard: React.FC<Props> = ({ recipe }) => {
+export const BackRecipeCard: React.FC<Props> = ({ recipe }) => {
 
     const [isFavorite, setIsFavorite] = useSafeState<boolean>(false);
 
@@ -28,8 +28,10 @@ export const RecipeCard: React.FC<Props> = ({ recipe }) => {
                 <SvgHeart isSelected={isFavorite} />
             </Pressable>
         </View>
-        <Text style={styles.name}>{recipe.name}</Text>
-        <Text style={styles.shortDesc}>{recipe.shortDescription}</Text>
+        <Text style={styles.name}>Cooking time: {recipe.cookingTime}</Text>
+        <Text style={styles.name}>Average rating: {recipe.averageRating}</Text>
+        <Text numberOfLines={2} style={styles.name}>Top Review: {recipe.topReview}</Text>
+        <Text style={styles.name}>Chilli heat level: {recipe.chilli}/3</Text>
     </View>;
 };
 
@@ -41,11 +43,12 @@ const styles = StyleSheet.create(
         imageContainer: {
             width: screenWidth * 0.7,
             height: 182,
+            marginBottom: 16,
         },
         recipeImage: {
             borderRadius: 5,
-            width: '100%',
-            height: '100%',
+            width: screenWidth * 0.7,
+            height: 182,
             paddingBottom: 16,
         },
         heartContainer: {
@@ -60,15 +63,10 @@ const styles = StyleSheet.create(
             right: 10,
         },
         name: {
-            marginTop: 16,
+            fontSize: 12,
             marginBottom: 5,
             color: 'black',
             fontWeight: '700'
         },
-        shortDesc: {
-            color: '#414042',
-            fontSize: 13,
-            flexShrink: 1,
-        }
     }
 );

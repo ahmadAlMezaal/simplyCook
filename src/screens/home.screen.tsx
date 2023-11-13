@@ -7,6 +7,7 @@ import { RadioButtonList } from '#components/radioButtonList.component';
 import { useSafeState } from '../hooks/useSafeState.hook';
 import { RecipesCarousel } from './components/recipesCarousel.component';
 import { SimplyCookButton } from '#components/simplyCookButton.component';
+import { FlipCard } from '#components/flipCard.component';
 
 export const HomeScreen: React.FC = () => {
 
